@@ -7,4 +7,6 @@ export default {
   stage: process.env.STAGE ?? "development",
   pinoLogLevel: process.env.PINO_LOG_LEVEL ?? "debug",
   dbUrl: process.env.DB_URL ?? "",
+  awsCognitoClientId: process.env.AWS_COGNITO_CLIENT_ID ?? "",
+  awsCognitoIssuer: process.env.AWS_COGNITO_ISSUER ?? "",
 };
