@@ -28,11 +28,13 @@ Before you begin, make sure you have the following installed:
 3. Configure environment variables. Create a `.env` file in the project root and add the following variables:
 
    ```env
+   APP_NAME="TASKS API"
    PORT=3000
-   MONGODB_URI=mongodb://localhost:27017/tasks
-   AWS_COGNITO_USER_POOL_ID=your_cognito_user_pool_id
-   AWS_COGNITO_CLIENT_ID=your_cognito_client_id
-   AWS_REGION=your_aws_region
+   STAGE=development
+   PINO_LOG_LEVEL=debug
+   DB_URL=mongodb+srv://cluster:<password>@<name>.5xlrfki.mongodb.net/<db_name>
+   AWS_COGNITO_CLIENT_ID=''
+   AWS_COGNITO_ISSUER='https://cognito-idp.us-east-1.amazonaws.com/######'
    ```
 
 ## Usage
