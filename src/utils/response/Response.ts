@@ -3,7 +3,6 @@ import { HttpCodeTypes } from "../http/http_code";
 import { ResponseInterface } from "../../interfaces/response.interface";
 import { ZodError } from "zod";
 import capitalize from "capitalize";
-import { ModuleType } from "../../interfaces/module.interface";
 import pluralize from "pluralize";
 
 export const formatResponse = (

@@ -31,6 +31,7 @@ const create = {
   body: object({
     title: string({ required_error: "Title is required." }),
     description: string({ required_error: "Description is required." }),
+    flag: z.enum(["urgent", "priority", "normal"]).default("normal").optional(),
   }),
 };
 
@@ -38,6 +39,7 @@ const update = {
   body: object({
     title: string().optional(),
     description: string().optional(),
+    flag: z.enum(["urgent", "priority", "normal"]).optional(),
     marked_as_done: z.coerce.number().default(0),
   }),
 };
