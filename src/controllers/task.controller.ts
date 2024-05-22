@@ -9,7 +9,7 @@ import {
 import {
   CreateTask,
   DeleteTask,
-  ReadAllTasks,
+  ReadAllTasksWithQuery,
   ReadOneTask,
   UpdateTask,
 } from "../services/task.service";
@@ -29,9 +29,15 @@ export default class TaskController {
     try {
       const validator = createTaskValidator.parse(req);
 
-      const { title, description } = validator.body;
+      const { title, description, flag } = validator.body;
 
-      const task = await CreateTask({ title, description });
+      const task = await CreateTask({
+        user: req.user?.sub,
+        title,
+        description,
+        flag,
+      });
+
       if (!task)
         return formatResponse(
           res,
@@ -68,10 +74,10 @@ export default class TaskController {
     }
   }
 
-  public async readAll(_req: Request, res: Response): Promise<Response> {
+  public async readAll(req: Request, res: Response): Promise<Response> {
     log.debug("METHOD: ReadAllTasks");
     try {
-      const tasks = await ReadAllTasks();
+      const tasks = await ReadAllTasksWithQuery({ user: req.user?.sub });
       if (!tasks)
         return formatResponse(
           res,
@@ -92,7 +98,12 @@ export default class TaskController {
       const validator = updateTaskValidator.parse(req);
 
       const { id } = validator.params;
-      const { title, description, marked_as_done: marked } = validator.body;
+      const {
+        title,
+        description,
+        marked_as_done: marked,
+        flag,
+      } = validator.body;
 
       const task = await ReadOneTask(id);
       if (!task)
@@ -109,6 +120,7 @@ export default class TaskController {
         title,
         description,
         marked_as_done,
+        flag,
       });
       if (!update)
         return formatResponse(
